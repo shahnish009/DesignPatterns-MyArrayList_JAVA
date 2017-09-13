@@ -1,0 +1,16 @@
+package myArrayList.util;
+
+import java.io.File;
+import java.util.Scanner;
+
+public class FileProcessor {
+
+        Scanner sc = null;
+        public FileProcessor(String inputFile) {
+                sc = new Scanner(new File(inputFile));
+        }
+        public String readLine() {
+
+        }
+
+}
