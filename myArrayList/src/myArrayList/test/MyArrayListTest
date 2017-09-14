@@ -5,9 +5,14 @@ public class MyArrayListTest {
 
         }
 
+        private void insertMultipleValues(MyArrayList myArrayList, Results results) {
+                myArrayList.insertSorted(10);
+                myArrayList.insertSorted(20);
+                myArrayList.insertSorted(30);
 
+
+        }
 }
-
 
 
 
