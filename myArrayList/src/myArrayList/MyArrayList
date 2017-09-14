@@ -1,8 +1,10 @@
 package myArrayList;
 
+import java.util.Arrays;
+
 public class MyArrayList {
 
-        public int initSize = 50;
+        public static final int initSize = 50;
         private int[] arr = null;
         private int size = 0;
 
@@ -12,7 +14,7 @@ public class MyArrayList {
 
         public void insertSorted(int newValue) {
                 if(size >= arr.length) {
-                        newSize = arr.length + Math.round(arr.length/2);
+                        int newSize = arr.length + Math.round(arr.length/2);
                         int[] newArr = new int[newSize];
                         for (int i = 0; i < arr.length; i++) {
                                 newArr[i] = arr[i];
@@ -24,4 +26,40 @@ public class MyArrayList {
                 Arrays.sort(arr);
         }
 
+        public void removeValue(int value) {
+                private int flag = -1;
+                for(int i = 0; i < size; i++){
+                        if(arr[i] == value) {
+                                flag = 0;
+                                for(int j = i; j < size - 1; j++) {
+                                        arr[j] = arr[j + 1];
+                                }
+                                arr[size - 1] = 0;
+                        }
+                }
+                if(flag == -1) {
+                        System.out.println("Value " + value + " does not exist in myArrayList");
+                }
+        }
+
+        public int indexOf(int value) {
+                for(int i = 0; i < size; i++) {
+                        if(arr[i] == value) {
+                                return i;
+                        }
+                }
+                return -1;
+        }
+
+        public int size() {
+                return size;
+        }
+
+        public int sum() {
+                int retSum = 0;
+                for(int i = 0; i < size; i++) {
+                        retSum += arr[i];
+                }
+                return retSum;
+        }
 }
