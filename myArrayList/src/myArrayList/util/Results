@@ -1,5 +1,9 @@
 package myArrayList.util;
 
-public class Results implements FileDisplayInterface, StdoutDisplayInterface {
+import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 
-}
+public class Results implements FileDisplayInterface, StdoutDisplayInterface {
+        private String outputFile;
+        private ArrayList<String> storeResults = new ArrayList<String>();
