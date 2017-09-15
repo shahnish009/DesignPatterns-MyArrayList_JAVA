@@ -4,62 +4,101 @@ import java.util.Arrays;
 
 public class MyArrayList {
 
-        public static final int initSize = 50;
-        private int[] arr = null;
-        private int size = 0;
+	public static final int initSize = 50;
+	private int[] arr = null;
+	private int size = 0;
 
-        public MyArrayList() {
-                arr = new int[initSize];
-        }
+	public MyArrayList() {
+		arr = new int[initSize];
+	}
 
-        public void insertSorted(int newValue) {
-                if(size >= arr.length) {
-                        int newSize = arr.length + Math.round(arr.length/2);
-                        int[] newArr = new int[newSize];
-                        for (int i = 0; i < arr.length; i++) {
-                                newArr[i] = arr[i];
-                        }
-                        arr = newArr;
-                }
-                arr[size] = newValue;
-                size++;
-                Arrays.sort(arr);
-        }
+	public void insertSorted(int newValue) {
+		if(size >= arr.length) {
+			int newSize = arr.length + Math.round(arr.length/2);
+			int[] newArr = new int[newSize];
+			for (int i = 0; i < arr.length; i++) {
+				newArr[i] = arr[i];
+			}
+			arr = newArr;
+		}
+		arr[size] = newValue;
+		size++;
+		Arrays.sort(arr, 0, size);
+	}
 
-        public void removeValue(int value) {
-                private int flag = -1;
-                for(int i = 0; i < size; i++){
-                        if(arr[i] == value) {
-                                flag = 0;
-                                for(int j = i; j < size - 1; j++) {
-                                        arr[j] = arr[j + 1];
-                                }
-                                arr[size - 1] = 0;
-                        }
-                }
-                if(flag == -1) {
-                        System.out.println("Value " + value + " does not exist in myArrayList");
-                }
-        }
+	public void removeValue(int value) {
+		int flag = -1;
+		for(int i = 0; i < size; i++){
+			if(arr[i] == value) {
+				flag = 0;
+				for(int j = i; j < size - 1; j++) {
+					arr[j] = arr[j + 1];
+				}
+				arr[size - 1] =0;
+				i--;
+				size--;
+			}
+		}
+		if(flag == -1) {
+			System.out.println("Value " + value + " does not exist in myArrayList");
+		}
+	}
 
-        public int indexOf(int value) {
-                for(int i = 0; i < size; i++) {
-                        if(arr[i] == value) {
-                                return i;
-                        }
-                }
-                return -1;
-        }
+        /**
+        *@return index of first occurrence of the value and -1 if not present in myarraylist
+        */
+	public int indexOf(int value) {
+		for(int i = 0; i < size; i++) {
+			if(arr[i] == value) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
-        public int size() {
-                return size;
-        }
+	/**
+        *@return current size of myarraylist
+        */
+	public int size() {
+		return size;
+	}
 
-        public int sum() {
-                int retSum = 0;
-                for(int i = 0; i < size; i++) {
-                        retSum += arr[i];
-                }
-                return retSum;
-        }
+        /**
+        *@return sum of all elements in myarraylist
+        */
+	public int sum() {
+		int retSum = 0;
+		for(int i = 0; i < size; i++) {
+			retSum += arr[i];
+		}
+		return retSum;
+	}
+
+        /**
+        *@return copy of myarraylist for testing
+        */
+	public int[] testArr() {
+		return Arrays.copyOf(arr, size);
+	}
+
+	/**
+	*@return formatted array values
+	*/
+	public String toString() {
+		int counter = 0;
+		StringBuffer sbr = new StringBuffer("");
+		for(int i = 0; i < size; i++) {
+			if(counter % 5 == 0) {
+				sbr.append("\n\n");
+			}
+			sbr.append(String.valueOf(arr[i]) + "\t\t");
+			counter++;
+		}
+		return sbr + "";
+	}
+
+	public void emptyArr() {
+		this.size = 0;
+		this.arr = new int[initSize];
+	}
 }
