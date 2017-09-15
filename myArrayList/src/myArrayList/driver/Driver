@@ -1,13 +1,48 @@
 package myArrayList.driver;
 
-public class Driver
-{
+import java.lang.NumberFormatException;
+import myArrayList.MyArrayList;
+import myArrayList.util.Results;
+import myArrayList.test.MyArrayListTest;
+import java.util.InputMismatchException;
+import myArrayList.util.FileProcessor;
 
-        public static void main(String[] args)
-        {
-            // command line validation is missing here. FIXME!
-            System.out.println("Hello World: " + args[0] + ", " + args[1] + ", $
-        }
+public class Driver {
 
+	public static void main(String[] args) throws Exception {
+		String ipFile = null;
+		String opFile = null;
+		if(args.length != 2) {
+                        throw new RuntimeException("Invalid number of arguments. Please enter 2 arguments");
+		}
+		else {
+			ipFile = args[0];
+			opFile = args[1];
+		}
+
+		MyArrayList myArrList = new MyArrayList();
+		Results resu = new Results(opFile);
+		MyArrayListTest myArrTest = new MyArrayListTest();
+		FileProcessor fileP = new FileProcessor(ipFile);
+		MyArrayList myArrL = new MyArrayList();
+		String ip = null;
+
+		while((ip = fileP.readLine()) != null) {
+			int intIp = 0;
+			try {
+				intIp = Integer.parseInt(ip);
+			}
+			catch(NumberFormatException e) {
+				throw new RuntimeException(e);
+			}
+			if(intIp < 0 || intIp > 10000) {
+				fileP.closeFile();
+				throw new InputMismatchException("Please enter number in the range 0 - 10000");
+			}
+			myArrL.insertSorted(intIp);
+		}
+		myArrTest.testMe(myArrList, resu);
+		resu.writeToFile(String.valueOf(myArrL.sum()));
+		resu.writeToStdout(String.valueOf(myArrL.sum()));
+	}
 }
-
