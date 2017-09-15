@@ -1,19 +1,85 @@
 package myArrayList.test;
 
+import myArrayList.MyArrayList;
+import myArrayList.util.Results;
+import java.util.Arrays;
+
 public class MyArrayListTest {
-        public void testMe(MyArrayList myArrayList, Results results) {
+	public void testMe(MyArrayList myArrayList, Results results) {
+		myArrayList.emptyArr();
+		insertMultipleValues(myArrayList, results);
 
-        }
+		myArrayList.emptyArr();
+		numberOfItems(myArrayList, results);
 
-        private void insertMultipleValues(MyArrayList myArrayList, Results results) {
-                myArrayList.insertSorted(10);
+                myArrayList.emptyArr();
+		removeAllInstances(myArrayList, results);
+
+                myArrayList.emptyArr();
+		indexOfFirstOccurrence(myArrayList, results);
+	}
+	 private void insertMultipleValues(MyArrayList myArrayList, Results results) {
                 myArrayList.insertSorted(20);
+                myArrayList.insertSorted(10);
                 myArrayList.insertSorted(30);
+		int[] compArr = {10,20,30};
 
-
+		if(Arrays.equals(compArr, myArrayList.testArr())) {
+			results.storeNewResult("test -insert multiple values- passed");
+		}
+		else {
+			results.storeNewResult("insertSorted() not working correctly");
+		}
         }
+
+	private void numberOfItems(MyArrayList myArrayList, Results results) {
+		myArrayList.insertSorted(81);
+                myArrayList.insertSorted(55);
+                myArrayList.insertSorted(12);
+                myArrayList.insertSorted(456);
+                myArrayList.insertSorted(20);
+		int[] compArr = {12,20,55,81,456};
+
+		if(Arrays.equals(compArr, myArrayList.testArr()) && compArr.length == myArrayList.size()) {
+                        results.storeNewResult("test -number of actual items in arraylist- passed");
+                }
+                else {
+                        results.storeNewResult("size() not working correctly");
+                }
+	}
+	private void removeAllInstances(MyArrayList myArrayList, Results results) {
+                myArrayList.insertSorted(81);
+                myArrayList.insertSorted(55);
+                myArrayList.insertSorted(12);
+                myArrayList.insertSorted(55);
+                myArrayList.insertSorted(81);
+                myArrayList.insertSorted(32);
+ 		myArrayList.removeValue(81);
+                myArrayList.removeValue(55);
+		int[] compArr = {12,32};
+
+		if(Arrays.equals(compArr, myArrayList.testArr())) {
+                        results.storeNewResult("test -removing all instances- passed");
+                }
+                else {
+                        results.storeNewResult("removeValue() not working correctly");
+                }
+	}
+
+	private void indexOfFirstOccurrence(MyArrayList myArrayList, Results results) {
+                myArrayList.insertSorted(65);
+                myArrayList.insertSorted(98);
+                myArrayList.insertSorted(20);
+                myArrayList.insertSorted(65);
+                myArrayList.removeValue(98);
+                int[] compArr = {20,65,65};
+
+                if(Arrays.equals(compArr, myArrayList.testArr()) && myArrayList.indexOf(65) ==1) {
+                        results.storeNewResult("test -index of first occurrence- passed");
+                }
+                else {
+                        results.storeNewResult("indexOf() not working correctly");
+                }
+
+	}
 }
-
-
-
-
