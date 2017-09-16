@@ -17,6 +17,24 @@ public class MyArrayListTest {
 
                 myArrayList.emptyArr();
 		indexOfFirstOccurrence(myArrayList, results);
+
+                myArrayList.emptyArr();
+                insertZeroes(myArrayList, results);
+
+                myArrayList.emptyArr();
+                sortedSum(myArrayList, results);
+
+                myArrayList.emptyArr();
+                valueNotPresent(myArrayList, results);
+
+                myArrayList.emptyArr();
+                indexOfEmptyArray(myArrayList, results);
+
+                myArrayList.emptyArr();
+                actualSizeOfArraylist(myArrayList, results);
+
+                myArrayList.emptyArr();
+                sumOfEmptyArraylist(myArrayList, results);
 	}
 	 private void insertMultipleValues(MyArrayList myArrayList, Results results) {
                 myArrayList.insertSorted(20);
@@ -74,12 +92,86 @@ public class MyArrayListTest {
                 myArrayList.removeValue(98);
                 int[] compArr = {20,65,65};
 
-                if(Arrays.equals(compArr, myArrayList.testArr()) && myArrayList.indexOf(65) ==1) {
+                if(Arrays.equals(compArr, myArrayList.testArr()) && myArrayList.indexOf(65) == 1) {
                         results.storeNewResult("test -index of first occurrence- passed");
                 }
                 else {
                         results.storeNewResult("indexOf() not working correctly");
                 }
-
 	}
+
+	private void insertZeroes(MyArrayList myArrayList, Results results) {
+                myArrayList.insertSorted(0);
+                myArrayList.insertSorted(0);
+                myArrayList.insertSorted(0);
+		int[] compArr = {0,0,0};
+
+		if(Arrays.equals(compArr, myArrayList.testArr()) && myArrayList.size() == 3) {
+                        results.storeNewResult("test -insert zeroes in arraylist- passed");
+                }
+                else {
+                        results.storeNewResult("insertSorted() not working correctly for specific values");
+                }
+	}
+
+        private void sortedSum(MyArrayList myArrayList, Results results) {
+                myArrayList.insertSorted(65);
+                myArrayList.insertSorted(105);
+                myArrayList.insertSorted(86);
+                int[] compArr = {65,86,105};
+
+                if(Arrays.equals(compArr, myArrayList.testArr()) && myArrayList.sum() == 256) {
+                        results.storeNewResult("test -sum of sorted values- passed");
+                }
+                else {
+                        results.storeNewResult("sum() not working correctly");
+                }
+        }
+
+        private void valueNotPresent(MyArrayList myArrayList, Results results) {
+                myArrayList.insertSorted(65);
+                myArrayList.insertSorted(105);
+                myArrayList.insertSorted(86);
+                int[] compArr = {65,86,105};
+
+                if(Arrays.equals(compArr, myArrayList.testArr()) && myArrayList.indexOf(99) == -1) {
+                        results.storeNewResult("test -value not present in arraylist- passed");
+                }
+                else {
+                        results.storeNewResult("indexOf() not working correctly");
+                }
+        }
+
+        private void indexOfEmptyArray(MyArrayList myArrayList, Results results) {
+
+                if(myArrayList.indexOf(25) == -1) {
+                        results.storeNewResult("test -index of empty array- passed");
+                }
+                else {
+                        results.storeNewResult("indexOf() not working correctly");
+                }
+        }
+
+        private void actualSizeOfArraylist(MyArrayList myArrayList, Results results) {
+                for(int i = 0; i < 54; i++) {
+			myArrayList.insertSorted(65);
+		}
+
+                if(myArrayList.size() == 54) {
+                        results.storeNewResult("test -actual size of arraylist for many values- passed");
+                }
+                else {
+                        results.storeNewResult("indexOf() not working correctly");
+                }
+        }
+
+        private void sumOfEmptyArraylist(MyArrayList myArrayList, Results results) {
+
+                if(myArrayList.sum() == 0) {
+                        results.storeNewResult("test -sum of empty arraylist- passed");
+                }
+                else {
+                        results.storeNewResult("sum() not working correctly");
+                }
+        }
 }
