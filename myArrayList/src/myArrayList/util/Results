@@ -5,5 +5,37 @@ import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
 public class Results implements FileDisplayInterface, StdoutDisplayInterface {
-        private String outputFile;
-        private ArrayList<String> storeResults = new ArrayList<String>();
+	private String outputFile;
+	private ArrayList<String> storeResults = new ArrayList<String>();
+
+	public Results(String outputFileIN) {
+		outputFile = outputFileIN;
+	}
+
+	public void writeToFile(String s) {
+		PrintWriter pw = null;
+
+		try {
+			pw = new PrintWriter(this.outputFile);
+		}
+		catch(FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		pw.println("The sum of all the values in the array list is: " + s);
+		for(String op : storeResults) {
+			pw.println(op);
+		}
+		pw.close();
+	}
+
+	public void storeNewResult(String s) {
+		storeResults.add(s);
+	}
+
+	public void writeToStdout(String s) {
+		System.out.println("The sum of all the values in the array list is: " + s);
+		for(String op : storeResults) {
+			System.out.println(op);
+		}
+	}
+}
